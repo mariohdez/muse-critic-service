@@ -1,2 +1,3 @@
 # muse-critic-service
-MuseCritic's service.
+MuseCritic's service 🎶🎧.
+
