@@ -1,5 +1,11 @@
-﻿
+﻿using MuseCritic.Models.DataStore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+/*
+ * Add MongoDB to the services container.
+ */
+builder.Services.Configure<MuseCriticDatabaseSettings>(builder.Configuration.GetSection("MuseCriticDatabase"));
 
 // Add services to the container.
 builder.Services.AddControllers();
