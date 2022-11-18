@@ -20,13 +20,17 @@ builder.Services.AddSingleton<AlbumRepository>();
 builder.Services.AddSingleton<ArtistRepository>();
 
 /*
+ * Add the MongoDB Review repository to the services container.
+ */
+builder.Services.AddSingleton<ReviewRepository>();
+
+/*
  * Add the MongoDB User repository to the services container.
  */
 builder.Services.AddSingleton<UserRepository>();
 
 // Add services to the container.
 builder.Services.AddControllers();
-
 
 var app = builder.Build();
 
