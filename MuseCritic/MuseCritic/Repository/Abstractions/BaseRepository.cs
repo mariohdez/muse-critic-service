@@ -6,8 +6,8 @@ using MuseCritic.Models.Repository;
 
 namespace MuseCritic.Repository.Abstractions
 {
-	public abstract class BaseRepository
-	{
+    public abstract class BaseRepository
+    {
         protected readonly IMongoDatabase database;
 
         public BaseRepository(IOptions<MuseCriticDatabaseSettings> museCriticDatabaseSettingsOptions)
@@ -19,4 +19,3 @@ namespace MuseCritic.Repository.Abstractions
         }
     }
 }
-
