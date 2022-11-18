@@ -38,7 +38,7 @@ namespace MuseCritic.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Artist artist)
+        public async Task<IActionResult> Post([FromBody] Artist artist)
         {
             await this.artistRepository.CreateAsync(artist);
 
@@ -46,7 +46,7 @@ namespace MuseCritic.Controllers
         }
 
         [HttpPut("{id:length(24)}")]
-        public async Task<IActionResult> Update(string id, Artist updatedArtist)
+        public async Task<IActionResult> Update(string id, [FromBody] Artist updatedArtist)
         {
             var currentArtist = await this.artistRepository.GetAsync(id);
 

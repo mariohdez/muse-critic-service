@@ -38,7 +38,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post(User user)
+    public async Task<IActionResult> Post([FromBody] User user)
     {
         await this.userRepository.CreateAsync(user);
 
@@ -46,7 +46,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPut("{id:length(24)}")]
-    public async Task<IActionResult> Update(string id, User updatedUser)
+    public async Task<IActionResult> Update(string id, [FromBody] User updatedUser)
     {
         var currentUser = await this.userRepository.GetAsync(id);
 

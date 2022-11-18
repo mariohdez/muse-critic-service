@@ -24,7 +24,7 @@ namespace MuseCritic.Controllers
             return await this.albumRepository.GetAsync();
         }
 
-        [HttpGet("{id:length(24)}")]
+        [HttpGet("id/{id:length(24)}")]
         public async Task<ActionResult<Album>> Get(string id)
         {
             var album = await this.albumRepository.GetAsync(id);
@@ -38,15 +38,15 @@ namespace MuseCritic.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Album album)
+        public async Task<IActionResult> Post([FromBody] Album album)
         {
             await this.albumRepository.CreateAsync(album);
 
             return new CreatedAtActionResult(actionName: nameof(Get), controllerName: "album", routeValues: new { id = album.Id }, value: album);
         }
 
-        [HttpPut("{id:length(24)}")]
-        public async Task<IActionResult> Update(string id, Album updatedAlbum)
+        [HttpPut("id/{id:length(24)}")]
+        public async Task<IActionResult> Update(string id, [FromBody] Album updatedAlbum)
         {
             var currentAlbum = await this.albumRepository.GetAsync(id);
 
