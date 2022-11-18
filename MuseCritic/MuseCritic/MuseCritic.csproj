@@ -18,10 +18,12 @@
     <None Remove="MongoDB.Driver" />
     <None Remove="Models\" />
     <None Remove="Repository\" />
+    <None Remove="Repository\Abstractions\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Repository\" />
+    <Folder Include="Repository\Abstractions\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" />

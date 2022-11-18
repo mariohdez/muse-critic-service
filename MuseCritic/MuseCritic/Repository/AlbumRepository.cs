@@ -3,20 +3,17 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using MuseCritic.Models;
 using MuseCritic.Models.Repository;
+using MuseCritic.Repository.Abstractions;
 
 namespace MuseCritic.Repository
 {
-    public class AlbumRepository
+    public class AlbumRepository : BaseRepository
     {
         private readonly IMongoCollection<Album> albumsCollection;
 
-        public AlbumRepository(IOptions<MuseCriticDatabaseSettings> museCriticDatabaseSettingsOptions)
+        public AlbumRepository(IOptions<MuseCriticDatabaseSettings> museCriticDatabaseSettingsOptions) : base(museCriticDatabaseSettingsOptions)
         {
-            _ = museCriticDatabaseSettingsOptions ?? throw new ArgumentNullException(nameof(museCriticDatabaseSettingsOptions), "Argument must be set.");
-
-            var mongoClient = new MongoClient(museCriticDatabaseSettingsOptions.Value.ConnectionString);
-            var mongoDatabase = mongoClient.GetDatabase(museCriticDatabaseSettingsOptions.Value.DatabaseName);
-            this.albumsCollection = mongoDatabase.GetCollection<Album>(museCriticDatabaseSettingsOptions.Value.AlbumsCollectionName);
+            this.albumsCollection = this.database.GetCollection<Album>(museCriticDatabaseSettingsOptions.Value.AlbumsCollectionName);
         }
 
         public async Task<List<Album>> GetAsync()
@@ -35,4 +32,3 @@ namespace MuseCritic.Repository
         }
     }
 }
-

@@ -8,5 +8,7 @@ namespace MuseCritic.Models.Repository
         public string DatabaseName { get; set; } = null!;
 
         public string AlbumsCollectionName { get; set; } = null!;
+
+        public string UsersCollectionName { get; set; } = null!;
     }
 }

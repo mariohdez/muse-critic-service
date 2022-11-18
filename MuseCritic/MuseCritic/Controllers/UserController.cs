@@ -3,37 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using MuseCritic.Models;
+using MuseCritic.Repository;
 
 namespace MuseCritic.Controllers;
 
 [Route("api/user")]
 public class UserController : ControllerBase
 {
-    [HttpGet]
-    public IEnumerable<string> Get()
+    private readonly UserRepository userRepository;
+
+    public UserController(UserRepository userRepository)
     {
-        return new string[] { "value1", "value2" };
+        this.userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository), "A non-null user Repository must be injected.");
     }
 
-    [HttpGet("{id}")]
-    public string Get(int id)
+    [HttpGet]
+    public async Task<List<User>> Get()
     {
-        return "value" + id;
+        return await this.userRepository.GetAsync();
+    }
+
+    [HttpGet("{id:length(24)}")]
+    public async Task<ActionResult<User>> Get(string id)
+    {
+        var user = await this.userRepository.GetAsync(id);
+
+        if (user == null)
+        {
+            return new NotFoundResult();
+        }
+
+        return user;
     }
 
     [HttpPost]
-    public void Post([FromBody] string value)
+    public async Task<IActionResult> Post(User user)
     {
-    }
+        await this.userRepository.CreateAsync(user);
 
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
-    {
-    }
-
-    [HttpDelete("{id}")]
-    public void Delete(int id)
-    {
+        return new CreatedAtActionResult(actionName: nameof(Get), controllerName: "user", routeValues: new { id = user.Id }, value: user);
     }
 }
-
