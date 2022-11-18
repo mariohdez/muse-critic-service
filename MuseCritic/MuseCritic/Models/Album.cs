@@ -18,6 +18,6 @@ namespace MuseCritic.Models
 
         public int RatingsCount { get; set; }
 
-        public string CoverArtUrl { get; set; }
+        public string CoverArtURL { get; set; }
     }
 }
