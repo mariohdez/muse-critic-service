@@ -44,4 +44,36 @@ public class UserController : ControllerBase
 
         return new CreatedAtActionResult(actionName: nameof(Get), controllerName: "user", routeValues: new { id = user.Id }, value: user);
     }
+
+    [HttpPut("{id:length(24)}")]
+    public async Task<IActionResult> Update(string id, User updatedUser)
+    {
+        var currentUser = await this.userRepository.GetAsync(id);
+
+        if (currentUser is null)
+        {
+            return NotFound();
+        }
+
+        updatedUser.Id = currentUser.Id;
+
+        await this.userRepository.UpdateAsync(id, updatedUser);
+
+        return NoContent();
+    }
+
+    [HttpDelete("{id:length(24)}")]
+    public async Task<IActionResult> Delete(string id)
+    {
+        var user = await this.userRepository.GetAsync(id);
+
+        if (user is null)
+        {
+            return NotFound();
+        }
+
+        await this.userRepository.RemoveAsync(id);
+
+        return NoContent();
+    }
 }

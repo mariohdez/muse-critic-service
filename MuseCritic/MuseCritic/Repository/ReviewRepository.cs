@@ -30,5 +30,15 @@ namespace MuseCritic.Repository
         {
             await this.reviewsCollection.InsertOneAsync(review);
         }
+
+        public async Task UpdateAsync(string id, Review updatedReview)
+        {
+            await this.reviewsCollection.ReplaceOneAsync(x => x.Id == id, updatedReview);
+        }
+
+        public async Task RemoveAsync(string id)
+        {
+            await this.reviewsCollection.DeleteOneAsync(x => x.Id == id);
+        }
     }
 }

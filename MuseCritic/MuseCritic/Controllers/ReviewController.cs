@@ -9,8 +9,8 @@ using MuseCritic.Repository;
 namespace MuseCritic.Controllers
 {
     [Route("api/review")]
-    public class ReviewController
-	{
+    public class ReviewController : ControllerBase
+    {
         private readonly ReviewRepository reviewRepository;
 
         public ReviewController(ReviewRepository reviewRepository)
@@ -44,6 +44,37 @@ namespace MuseCritic.Controllers
 
             return new CreatedAtActionResult(actionName: nameof(Get), controllerName: "review", routeValues: new { id = review.Id }, value: review);
         }
+
+        [HttpPut("{id:length(24)}")]
+        public async Task<IActionResult> Update(string id, Review updatedReview)
+        {
+            var currentReview = await this.reviewRepository.GetAsync(id);
+
+            if (currentReview is null)
+            {
+                return NotFound();
+            }
+
+            updatedReview.Id = currentReview.Id;
+
+            await this.reviewRepository.UpdateAsync(id, updatedReview);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id:length(24)}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var review = await this.reviewRepository.GetAsync(id);
+
+            if (review is null)
+            {
+                return NotFound();
+            }
+
+            await this.reviewRepository.RemoveAsync(id);
+
+            return NoContent();
+        }
     }
 }
-

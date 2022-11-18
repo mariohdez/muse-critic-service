@@ -30,6 +30,15 @@ namespace MuseCritic.Repository
         {
             await this.artistsCollection.InsertOneAsync(artist);
         }
+
+        public async Task UpdateAsync(string id, Artist updatedArtist)
+        {
+            await this.artistsCollection.ReplaceOneAsync(x => x.Id == id, updatedArtist);
+        }
+
+        public async Task RemoveAsync(string id)
+        {
+            await this.artistsCollection.DeleteOneAsync(x => x.Id == id);
+        }
     }
 }
-

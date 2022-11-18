@@ -44,5 +44,37 @@ namespace MuseCritic.Controllers
 
             return new CreatedAtActionResult(actionName: nameof(Get), controllerName: "album", routeValues: new { id = album.Id }, value: album);
         }
+
+        [HttpPut("{id:length(24)}")]
+        public async Task<IActionResult> Update(string id, Album updatedAlbum)
+        {
+            var currentAlbum = await this.albumRepository.GetAsync(id);
+
+            if (currentAlbum is null)
+            {
+                return NotFound();
+            }
+
+            updatedAlbum.Id = currentAlbum.Id;
+
+            await this.albumRepository.UpdateAsync(id, updatedAlbum);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id:length(24)}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var album = await this.albumRepository.GetAsync(id);
+
+            if (album is null)
+            {
+                return NotFound();
+            }
+
+            await this.albumRepository.RemoveAsync(id);
+
+            return NoContent();
+        }
     }
 }
