@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using MuseCritic.Models;
-using MuseCritic.Models.DataStore;
+using MuseCritic.Models.Repository;
 
 namespace MuseCritic.Repository
 {

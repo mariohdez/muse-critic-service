@@ -1,5 +1,5 @@
 ﻿using System;
-namespace MuseCritic.Models.DataStore
+namespace MuseCritic.Models.Repository
 {
     public class MuseCriticDatabaseSettings
     {

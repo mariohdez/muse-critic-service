@@ -1,17 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using MuseCritic.Models.DataStore;
+using MuseCritic.Models.Repository;
 using MuseCritic.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
 /*
  * Add MongoDB settings to the services container.
- * 
- * 
-builder.Services.Configure<BookStoreDatabaseSettings>(
-    builder.Configuration.GetSection("BookStoreDatabase"));
- * 
- * 
  */
 builder.Services.Configure<MuseCriticDatabaseSettings>(builder.Configuration.GetSection("MuseCriticDatabase"));
 
