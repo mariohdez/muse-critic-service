@@ -10,5 +10,7 @@ namespace MuseCritic.Models.Repository
         public string AlbumsCollectionName { get; set; } = null!;
 
         public string UsersCollectionName { get; set; } = null!;
+
+        public string ArtistsCollectionName { get; set; } = null!;
     }
 }

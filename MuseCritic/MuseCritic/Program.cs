@@ -15,6 +15,11 @@ builder.Services.Configure<MuseCriticDatabaseSettings>(builder.Configuration.Get
 builder.Services.AddSingleton<AlbumRepository>();
 
 /*
+ * Add the MongoDB Artist repository to the services container.
+ */
+builder.Services.AddSingleton<ArtistRepository>();
+
+/*
  * Add the MongoDB User repository to the services container.
  */
 builder.Services.AddSingleton<UserRepository>();

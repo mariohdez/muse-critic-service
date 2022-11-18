@@ -15,7 +15,7 @@ namespace MuseCritic.Controllers
 
         public AlbumController(AlbumRepository albumRepository)
         {
-            this.albumRepository = albumRepository ?? throw new ArgumentNullException(nameof(albumRepository), "A non-null Album Repository must be injected.");
+            this.albumRepository = albumRepository ?? throw new ArgumentNullException(nameof(albumRepository), "A non-null album Repository must be injected.");
         }
 
         [HttpGet]
